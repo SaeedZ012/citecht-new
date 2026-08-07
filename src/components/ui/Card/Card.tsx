@@ -1,0 +1,49 @@
+import type { HTMLAttributes } from "react";
+import { cn } from "@/utils/cn";
+
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  /** Adds a subtle hover elevation for interactive cards. */
+  interactive?: boolean;
+}
+
+/**
+ * Surface container with border, radius, and background.
+ * Compose with {@link CardHeader}, {@link CardBody}, and {@link CardFooter}.
+ */
+export function Card({ interactive = false, className, ...props }: CardProps) {
+  return (
+    <div
+      className={cn(
+        "rounded-lg border border-border bg-surface text-surface-foreground shadow-sm",
+        interactive && "transition-shadow hover:shadow-md",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+export function CardHeader({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={cn("flex flex-col gap-1.5 p-6", className)} {...props} />
+  );
+}
+
+export function CardBody({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 pt-0", className)} {...props} />;
+}
+
+export function CardFooter({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={cn("flex items-center p-6 pt-0", className)} {...props} />
+  );
+}

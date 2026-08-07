@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (toggled by the ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+ * Design tokens (light theme)
+ * Centralized semantic color palette. Components must reference these tokens
+ * only (e.g. `bg-primary`, `text-muted-foreground`) — never hardcoded colors.
+ *
+ * Token mapping to the design vocabulary:
+ *   text-primary   -> `foreground`
+ *   text-secondary -> `muted-foreground`
+ *   surface        -> card-like elevated background
+ * Contrast targets: foreground pairs meet WCAG AA for body text.
+ * ------------------------------------------------------------------------- */
+:root {
+  /* Base surfaces + text */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --surface: #ffffff;
+  --surface-foreground: #0a0a0a;
+
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+
+  --border: #e4e4e7;
+  --ring: #0a0a0a;
+
+  /* Brand */
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #171717;
+  --accent: #4f46e5;
+  --accent-foreground: #ffffff;
+
+  /* Status (theme-independent, AA against their foreground) */
+  --success: #15803d;
+  --success-foreground: #ffffff;
+  --warning: #b45309;
+  --warning-foreground: #ffffff;
+  --danger: #b91c1c;
+  --danger-foreground: #ffffff;
+  --info: #1d4ed8;
+  --info-foreground: #ffffff;
+
+  /* Overlay for modals / scrims */
+  --overlay: rgb(0 0 0 / 0.5);
+
+  --radius: 0.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * Design tokens (dark theme)
+ * Only the theme-dependent tokens are overridden; status colors are shared.
+ * ------------------------------------------------------------------------- */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --surface: #0f0f10;
+  --surface-foreground: #fafafa;
+
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+
+  --border: #27272a;
+  --ring: #d4d4d8;
+
+  --primary: #fafafa;
+  --primary-foreground: #171717;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --accent: #6366f1;
+  --accent-foreground: #ffffff;
+
+  --overlay: rgb(0 0 0 / 0.6);
+}
+
+/* ---------------------------------------------------------------------------
+ * Expose tokens to Tailwind so `bg-primary`, `text-muted-foreground`,
+ * `bg-surface`, `bg-danger`, `bg-overlay`, etc. resolve to the variables above.
+ * ------------------------------------------------------------------------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-overlay: var(--overlay);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+ * Marketing hero animation (CSS-only; no JS required).
+ *   .marquee -> continuously scrolls the capabilities band
+ * Animation respects `prefers-reduced-motion`.
+ * ------------------------------------------------------------------------- */
+.marquee {
+  overflow: hidden;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Reverses playback direction so a second row can scroll the opposite way
+   using the same keyframes (see the Tech Stack section). */
+.marquee__track--reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes hero-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-caption-in {
+  animation: hero-caption-in 0.45s ease-out;
+}
+
+/* ---------------------------------------------------------------------------
+ * Shared, lightweight entrance + ambient motion utilities.
+ * Used by hero sections for staggered reveals and slow, cinematic detail
+ * animation. All respect `prefers-reduced-motion` below.
+ * ------------------------------------------------------------------------- */
+@keyframes fade-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise {
+  animation: fade-rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 70s linear infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+.animate-breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+
+/* .marquee__track is intentionally exempt from the reduced-motion rule
+   below: it's a slow, linear-only translation (no scaling/rotation/
+   flashing) — the same category of motion most browsers/OSes already
+   exempt from reduced-motion (native marquees, ticker widgets) — so the
+   Tech Stack rows keep scrolling for every visitor. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-caption-in,
+  .animate-fade-rise,
+  .animate-spin-slow,
+  .animate-breathe {
+    animation: none;
+  }
+}
