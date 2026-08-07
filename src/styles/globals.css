@@ -208,6 +208,38 @@ body {
   animation: breathe 6s ease-in-out infinite;
 }
 
+/* Gentle continuous float for the Workflow section's stage icon. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Ambient drift + fade for the Workflow section's background particles. */
+@keyframes particle-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+    opacity: 0.7;
+  }
+}
+
+.animate-particle {
+  animation: particle-drift 6s ease-in-out infinite;
+}
+
 /* .marquee__track is intentionally exempt from the reduced-motion rule
    below: it's a slow, linear-only translation (no scaling/rotation/
    flashing) — the same category of motion most browsers/OSes already
@@ -217,7 +249,9 @@ body {
   .hero-caption-in,
   .animate-fade-rise,
   .animate-spin-slow,
-  .animate-breathe {
+  .animate-breathe,
+  .animate-float,
+  .animate-particle {
     animation: none;
   }
 }
