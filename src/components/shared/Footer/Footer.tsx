@@ -60,15 +60,15 @@ export function Footer() {
               Follow
             </h2>
             <ul className="flex flex-col gap-2">
-              {Object.entries(SOCIAL_LINKS).map(([name, url]) => (
-                <li key={name}>
+              {SOCIAL_LINKS.map((item) => (
+                <li key={item.href}>
                   <Link
-                    href={url}
+                    href={item.href}
                     external
                     variant="unstyled"
-                    className={cn("text-sm capitalize transition-colors", FOOTER_LINK)}
+                    className={cn("text-sm transition-colors", FOOTER_LINK)}
                   >
-                    {name}
+                    {item.label}
                   </Link>
                 </li>
               ))}

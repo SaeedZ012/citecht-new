@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Image } from "@/components/ui/Image";
 import type { ServiceDetail } from "@/data/services";
@@ -18,24 +19,11 @@ export function Overview({ service }: OverviewProps) {
   const visualSrc = getServiceVisual(service.slug);
 
   return (
-    <Section spacing="lg" id="overview" className="relative bg-muted/40">
-      <div
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-        aria-hidden="true"
-      >
-        <div className="absolute -left-20 top-16 h-64 w-64 rounded-full bg-accent/[0.06] blur-3xl" />
-        <div className="absolute -right-16 bottom-10 h-56 w-56 rounded-full bg-info/[0.06] blur-3xl" />
-      </div>
-
-      <Container size="xl" className="relative">
+    <Section spacing="lg" id="overview" className="bg-muted/40">
+      <Container size="xl">
         <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col gap-4 lg:col-span-7">
-            <div className="flex items-center gap-3">
-              <span className="h-5 w-0.5 shrink-0 bg-accent" aria-hidden="true" />
-              <span className="text-sm font-medium text-muted-foreground">
-                How this service works
-              </span>
-            </div>
+            <Eyebrow>How this service works</Eyebrow>
 
             <Heading variant="h2" className="text-balance">
               {service.overviewTitle}

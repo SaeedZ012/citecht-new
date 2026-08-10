@@ -2,9 +2,8 @@ import type { NavItem } from "@/types/navigation";
 
 import { ROUTES } from "@/constants/routes";
 
-/** Primary header navigation. */
+/** Primary header navigation. Logo covers Home. */
 export const MAIN_NAV: NavItem[] = [
-  { label: "Home", href: ROUTES.home },
   { label: "Services", href: ROUTES.services },
   { label: "About", href: ROUTES.about },
   { label: "Insights", href: ROUTES.insights },

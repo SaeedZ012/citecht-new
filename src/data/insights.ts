@@ -147,15 +147,13 @@ export function getInsightBySlug(slug: string): InsightArticle | undefined {
 }
 
 /**
- * Picks `count` articles at random, without repeats. Used by the home
- * page's "Featured Case Studies" section. This module only runs on the
- * server for these statically-generated pages, so the selection is made
- * once at build time and baked into the static HTML — not re-randomized
- * per client, which would cause hydration mismatches.
+ * Deterministic preview set for the home Insights section.
+ * Avoids Math.random() so SSR/dev HTML stays stable across requests.
  */
 export function getRandomInsights(count: number): InsightArticle[] {
-  const shuffled = [...INSIGHTS].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  const featured = getFeaturedInsight();
+  const rest = INSIGHTS.filter((article) => article.slug !== featured.slug);
+  return [featured, ...rest].slice(0, count);
 }
 
 /**

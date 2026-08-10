@@ -68,7 +68,7 @@ export function HeroCarousel() {
   return (
     <div className="flex w-full max-w-xl flex-col items-center gap-5 lg:max-w-2xl lg:gap-6">
       <div
-        className="relative aspect-[4/5] w-full min-h-[280px] max-h-[min(52vh,420px)] sm:min-h-[320px]"
+        className="relative aspect-[4/5] w-full min-h-[280px] max-h-[min(52vh,420px)] overflow-hidden sm:min-h-[320px]"
         aria-roledescription="carousel"
         aria-label="Featured services"
       >
@@ -93,8 +93,8 @@ export function HeroCarousel() {
                       isActive
                         ? "z-[3] translate-x-0 opacity-100"
                         : isExiting
-                          ? "z-[2] -translate-x-[130%] opacity-0"
-                          : "z-[1] translate-x-[130%] opacity-0"
+                          ? "z-[2] -translate-x-[110%] opacity-0"
+                          : "z-[1] translate-x-[110%] opacity-0"
                     )
               )}
               aria-hidden={!isActive}
@@ -106,7 +106,7 @@ export function HeroCarousel() {
                 height={480}
                 priority={index === 0}
                 unoptimized
-                className="h-auto max-h-[108%] w-auto max-w-[112%] object-contain"
+                className="h-auto max-h-full w-auto max-w-full object-contain"
               />
             </div>
           );
@@ -124,7 +124,7 @@ export function HeroCarousel() {
       <p
         key={activeSlide.id}
         className={cn(
-          "min-h-8 text-center text-2xl font-bold text-info sm:text-3xl",
+          "min-h-8 text-center text-xl font-semibold text-foreground sm:text-2xl",
           !prefersReducedMotion && "hero-caption-in"
         )}
         aria-live="polite"

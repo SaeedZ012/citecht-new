@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Link } from "@/components/ui/Link";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/shared/Logo";
 import { MAIN_NAV } from "@/constants/navigation";
 import { ROUTES, servicePath } from "@/constants/routes";
@@ -30,7 +31,6 @@ function isNavActive(pathname: string, href: string) {
 const SERVICE_MENU = SERVICES.map((service) => ({
   label: service.title,
   href: servicePath(service.slug),
-  description: service.shortDescription,
 }));
 
 function ChevronDown({ className }: { className?: string }) {
@@ -67,65 +67,68 @@ export function Navbar() {
         <div className="flex h-20 items-center justify-between gap-4">
           <Logo size="xl" />
 
-          <nav
-            aria-label="Primary"
-            className="hidden items-center gap-1 lg:flex"
-          >
-            {MAIN_NAV.map((item) => {
-              const isActive = isNavActive(pathname, item.href);
+          <div className="hidden items-center gap-3 lg:flex">
+            <nav aria-label="Primary" className="flex items-center gap-1">
+              {MAIN_NAV.map((item) => {
+                const isActive = isNavActive(pathname, item.href);
 
-              if (item.label === "Services") {
-                return (
-                  <div key={item.href} className="group relative">
-                    <Link
-                      href={item.href}
-                      variant="unstyled"
-                      aria-haspopup="true"
-                      aria-current={isActive ? "page" : undefined}
-                      className={navLinkClass(isActive, "inline-flex items-center gap-1")}
-                    >
-                      {item.label}
-                      <ChevronDown className="transition-transform group-hover:rotate-180" />
-                    </Link>
+                if (item.label === "Services") {
+                  return (
+                    <div key={item.href} className="group relative">
+                      <Link
+                        href={item.href}
+                        variant="unstyled"
+                        aria-haspopup="true"
+                        aria-current={isActive ? "page" : undefined}
+                        className={navLinkClass(
+                          isActive,
+                          "inline-flex items-center gap-1"
+                        )}
+                      >
+                        {item.label}
+                        <ChevronDown className="transition-transform group-hover:rotate-180" />
+                      </Link>
 
-                    <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-[36rem] -translate-x-1/2 pt-3 opacity-0 transition group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
-                      <div className="rounded-lg border border-border bg-surface p-2 shadow-md">
-                        <div className="grid grid-cols-2 gap-1">
-                          {SERVICE_MENU.map((sub) => (
-                            <Link
-                              key={sub.label}
-                              href={sub.href}
-                              variant="unstyled"
-                              className="flex flex-col gap-0.5 rounded-md px-3 py-2.5 transition-colors hover:bg-muted"
-                            >
-                              <span className="text-sm font-medium text-foreground">
+                      <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 transition group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
+                        <div className="rounded-lg border border-border bg-surface p-2 shadow-sm">
+                          <div className="flex flex-col gap-0.5">
+                            {SERVICE_MENU.map((sub) => (
+                              <Link
+                                key={sub.label}
+                                href={sub.href}
+                                variant="unstyled"
+                                className="rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                              >
                                 {sub.label}
-                              </span>
-                              <span className="text-xs leading-snug text-muted-foreground">
-                                {sub.description}
-                              </span>
-                            </Link>
-                          ))}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              }
+                  );
+                }
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  variant="unstyled"
-                  aria-current={isActive ? "page" : undefined}
-                  className={navLinkClass(isActive)}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    variant="unstyled"
+                    aria-current={isActive ? "page" : undefined}
+                    className={navLinkClass(isActive)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <Link href={ROUTES.contact} variant="unstyled" className="inline-flex">
+              <Button variant="accent" size="sm">
+                Start a project
+              </Button>
+            </Link>
+          </div>
 
           <Button
             variant="ghost"
@@ -136,7 +139,20 @@ export function Navbar() {
             aria-label="Toggle navigation menu"
             onClick={menu.toggle}
           >
-            <span aria-hidden="true">{menu.isOpen ? "\u2715" : "\u2630"}</span>
+            <Icon size="sm" aria-hidden="true">
+              {menu.isOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6L6 18" />
+                </>
+              ) : (
+                <>
+                  <path d="M4 7h16" />
+                  <path d="M4 12h16" />
+                  <path d="M4 17h16" />
+                </>
+              )}
+            </Icon>
           </Button>
         </div>
 
@@ -178,6 +194,19 @@ export function Navbar() {
                   {sub.label}
                 </Link>
               ))}
+            </div>
+
+            <div className="mt-2 border-t border-border pt-3">
+              <Link
+                href={ROUTES.contact}
+                variant="unstyled"
+                onClick={menu.close}
+                className="inline-flex w-full"
+              >
+                <Button variant="accent" size="md" className="w-full">
+                  Start a project
+                </Button>
+              </Link>
             </div>
           </nav>
         ) : null}

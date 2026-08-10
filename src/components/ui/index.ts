@@ -13,3 +13,4 @@ export * from "./Image";
 export * from "./Spinner";
 export * from "./Loader";
 export * from "./Icon";
+export * from "./Eyebrow";

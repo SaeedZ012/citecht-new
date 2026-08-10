@@ -19,19 +19,16 @@ function Shell({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-lg border border-border bg-surface shadow-md",
+        "flex h-full min-h-0 flex-col overflow-hidden rounded-md border border-border bg-surface",
         className
       )}
     >
-      <div className="flex items-center gap-1.5 border-b border-border bg-muted/60 px-3 py-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-danger/70" aria-hidden="true" />
-        <span className="h-1.5 w-1.5 rounded-full bg-warning/70" aria-hidden="true" />
-        <span className="h-1.5 w-1.5 rounded-full bg-success/70" aria-hidden="true" />
-        <span className="ml-2 truncate text-[10px] font-medium tracking-wide text-muted-foreground">
+      <div className="flex shrink-0 items-center border-b border-border bg-muted/50 px-3 py-2">
+        <span className="truncate text-[10px] font-medium tracking-wide text-muted-foreground">
           {title}
         </span>
       </div>
-      <div className="p-3">{children}</div>
+      <div className="min-h-0 flex-1 overflow-hidden p-3">{children}</div>
     </div>
   );
 }
@@ -39,20 +36,20 @@ function Shell({
 function FinTechMockup() {
   return (
     <Shell title="ledger.citecht.app">
-      <div className="flex flex-col gap-3">
-        <div className="rounded-md border border-border bg-muted/50 p-3">
+      <div className="flex h-full flex-col gap-2.5">
+        <div className="rounded-md border border-border bg-muted/50 p-2.5">
           <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
             Available balance
           </p>
-          <p className="mt-1 text-lg font-semibold text-foreground">$248,920.14</p>
+          <p className="mt-1 text-base font-semibold text-foreground">$248,920.14</p>
           <p className="mt-0.5 text-[11px] text-success">+12.4% this month</p>
         </div>
-        <div className="flex items-end gap-1.5 px-0.5">
+        <div className="flex h-12 items-end gap-1.5 px-0.5">
           {[40, 55, 48, 70, 62, 85, 78].map((height, index) => (
             <span
               key={index}
               className="flex-1 rounded-sm bg-accent/80"
-              style={{ height: `${height * 0.45}px` }}
+              style={{ height: `${height * 0.35}px` }}
               aria-hidden="true"
             />
           ))}
@@ -107,23 +104,25 @@ function HealthTechMockup() {
 function EcommerceMockup() {
   return (
     <Shell title="storefront">
-      <div className="grid grid-cols-2 gap-2">
-        {[1, 2, 3, 4].map((item) => (
-          <div
-            key={item}
-            className="overflow-hidden rounded-md border border-border"
-          >
-            <div className="aspect-[4/3] bg-muted" />
-            <div className="space-y-1 p-2">
-              <div className="h-1.5 w-3/4 rounded-full bg-border" />
-              <div className="h-1.5 w-1/2 rounded-full bg-accent/40" />
+      <div className="flex h-full flex-col gap-2">
+        <div className="grid min-h-0 flex-1 grid-cols-2 gap-2">
+          {[1, 2, 3, 4].map((item) => (
+            <div
+              key={item}
+              className="overflow-hidden rounded-md border border-border"
+            >
+              <div className="h-12 bg-muted sm:h-14" />
+              <div className="space-y-1 p-2">
+                <div className="h-1.5 w-3/4 rounded-full bg-border" />
+                <div className="h-1.5 w-1/2 rounded-full bg-accent/40" />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 flex items-center justify-between rounded-md bg-accent px-3 py-2 text-[11px] font-medium text-accent-foreground">
-        <span>Checkout ready</span>
-        <span>2 items</span>
+          ))}
+        </div>
+        <div className="flex shrink-0 items-center justify-between rounded-md bg-accent px-3 py-2 text-[11px] font-medium text-accent-foreground">
+          <span>Checkout ready</span>
+          <span>2 items</span>
+        </div>
       </div>
     </Shell>
   );
@@ -248,5 +247,5 @@ export function IndustryMockup({ id, className }: IndustryMockupProps) {
     startups: <StartupsMockup />,
   }[id];
 
-  return <div className={cn("w-full", className)}>{mockup}</div>;
+  return <div className={cn("h-full w-full min-h-0", className)}>{mockup}</div>;
 }

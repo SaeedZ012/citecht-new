@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon } from "@/components/ui/Icon";
 import { Link } from "@/components/ui/Link";
 import { ROUTES } from "@/constants/routes";
@@ -29,12 +30,12 @@ export interface CTAProps {
  * the end of any page.
  */
 export function CTA({
-  eyebrow = "LET'S BUILD TOGETHER",
-  title = "Let's engineer your next digital transformation.",
-  description = "We partner with ambitious teams to design, build, and scale digital solutions that move business forward. Tell us what you're building, and we'll help you ship it.",
-  primaryLabel = "Start a Project",
+  eyebrow = "Start a conversation",
+  title = "Have a system to build, fix, or improve?",
+  description = "Tell us what is slowing the work down. We will talk through the situation and help identify a sensible next step.",
+  primaryLabel = "Start a project",
   primaryHref = ROUTES.contact,
-  secondaryLabel = "Explore Services",
+  secondaryLabel = "Explore services",
   secondaryHref = ROUTES.services,
 }: CTAProps) {
   return (
@@ -44,13 +45,9 @@ export function CTA({
           <CTABackdrop />
 
           <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-background/20 px-4 py-1.5 text-xs font-semibold tracking-[0.15em] text-background/70 dark:border-foreground/20 dark:text-foreground/70">
-              <span
-                className="h-1.5 w-1.5 rounded-full bg-accent"
-                aria-hidden="true"
-              />
+            <Eyebrow variant="pill" onDark>
               {eyebrow}
-            </span>
+            </Eyebrow>
 
             <Heading
               variant="h2"

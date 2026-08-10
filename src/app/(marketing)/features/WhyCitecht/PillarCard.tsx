@@ -1,35 +1,37 @@
-import { Card } from "@/components/ui/Card";
 import { Heading, Text } from "@/components/ui/Typography";
-import { Icon } from "@/components/ui/Icon";
 import type { Pillar } from "./whyCitechtData";
 
 export interface PillarCardProps {
   pillar: Pillar;
+  index: number;
 }
 
 /**
- * One of the three "build / improve & automate / stabilize" pillars.
- * Icon-led card with a tag, title, and supporting description.
+ * Simple numbered pillar row — no icon cards.
  */
-export function PillarCard({ pillar }: PillarCardProps) {
+export function PillarCard({ pillar, index }: PillarCardProps) {
+  const number = String(index + 1).padStart(2, "0");
+
   return (
-    <Card interactive className="flex flex-col gap-4 p-6 sm:p-7">
-      <span className="flex h-11 w-11 items-center justify-center rounded-md bg-accent/10 text-accent">
-        <Icon size="md">{pillar.icon}</Icon>
+    <div className="grid gap-3 py-6 sm:grid-cols-[3.5rem_minmax(0,1fr)] sm:gap-6">
+      <span className="font-mono text-xs tracking-[0.16em] text-accent">
+        {number}
       </span>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex min-w-0 flex-col gap-1.5">
         <Text
           variant="caption"
-          className="font-semibold uppercase tracking-wide text-accent"
+          className="font-medium tracking-[0.12em] text-muted-foreground uppercase"
         >
           {pillar.tag}
         </Text>
         <Heading variant="h4" as="h3">
           {pillar.title}
         </Heading>
-        <Text variant="muted">{pillar.description}</Text>
+        <Text variant="muted" className="max-w-lg">
+          {pillar.description}
+        </Text>
       </div>
-    </Card>
+    </div>
   );
 }

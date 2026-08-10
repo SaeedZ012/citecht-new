@@ -11,10 +11,8 @@ export interface ArticleCardProps {
 }
 
 /**
- * A single article preview. The whole card is one link (matching the
- * Services grid's minor-radius, image-top pattern) so the entire surface
- * is clickable, not just the title. Shared between the Insights page's
- * grid and the home page's "Featured Case Studies" section.
+ * A single article preview. The whole card is one link so the entire
+ * surface is clickable. Used by the Insights page grid.
  */
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
@@ -23,14 +21,17 @@ export function ArticleCard({ article }: ArticleCardProps) {
       variant="unstyled"
       className="group block h-full"
     >
-      <Card interactive className="flex h-full flex-col overflow-hidden rounded-md">
+      <Card
+        interactive
+        className="flex h-full flex-col overflow-hidden rounded-lg shadow-none hover:shadow-none hover:border-foreground/20"
+      >
         <div className="relative aspect-[16/10] w-full overflow-hidden">
           <Image
             src={article.imageSrc}
             alt=""
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </div>
         <CardBody className="flex flex-1 flex-col gap-3 p-5">

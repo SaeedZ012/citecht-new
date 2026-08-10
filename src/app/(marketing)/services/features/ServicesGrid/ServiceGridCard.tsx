@@ -9,8 +9,7 @@ export interface ServiceGridCardProps {
 }
 
 /**
- * Service catalog card: image on top, title + description below.
- * The whole card links to the dedicated service detail page.
+ * Service catalog card: image, title, short description.
  */
 export function ServiceGridCard({ service }: ServiceGridCardProps) {
   return (
@@ -22,14 +21,20 @@ export function ServiceGridCard({ service }: ServiceGridCardProps) {
             alt=""
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </div>
-        <CardBody className="flex flex-col gap-2 p-5">
-          <Heading variant="h4" as="h3">
+        <CardBody className="flex flex-col gap-1.5 p-5">
+          <Heading
+            variant="h4"
+            as="h3"
+            className="transition-colors duration-300 group-hover:text-accent"
+          >
             {service.title}
           </Heading>
-          <Text variant="muted">{service.description}</Text>
+          <Text variant="muted" className="line-clamp-2">
+            {service.description}
+          </Text>
         </CardBody>
       </Card>
     </Link>

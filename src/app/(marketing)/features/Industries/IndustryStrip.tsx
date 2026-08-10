@@ -16,7 +16,7 @@ export function IndustryStrip() {
 
   return (
     <div
-      className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory lg:overflow-visible lg:pb-0 lg:snap-none [&::-webkit-scrollbar]:hidden"
+      className="flex items-stretch gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory lg:overflow-visible lg:pb-0 lg:snap-none [&::-webkit-scrollbar]:hidden"
       onMouseLeave={() => {
         if (isDesktop) setActiveId(HOME_INDUSTRIES[0].id);
       }}

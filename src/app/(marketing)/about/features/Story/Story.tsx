@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Icon } from "@/components/ui/Icon";
 import { Image } from "@/components/ui/Image";
@@ -37,12 +38,7 @@ export function Story() {
           </div>
 
           <div className="order-1 flex flex-col gap-6 lg:order-2 lg:col-span-6">
-            <div className="flex items-center gap-3">
-              <span className="h-5 w-0.5 shrink-0 bg-accent" aria-hidden="true" />
-              <span className="text-sm font-medium text-muted-foreground">
-                Who We Are
-              </span>
-            </div>
+            <Eyebrow>Who we are</Eyebrow>
 
             <Heading variant="h2" className="text-balance">
               Built by engineers who&apos;ve felt the pain of bad handoffs.

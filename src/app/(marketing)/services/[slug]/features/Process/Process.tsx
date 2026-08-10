@@ -25,7 +25,7 @@ export function Process({ service }: ProcessProps) {
             A clear path from problem to operable delivery.
           </Heading>
           <Text variant="muted">
-            The same engagement discipline we use across Citecht — scoped to{" "}
+            The same engagement discipline we use across CiTechT — scoped to{" "}
             {service.title.toLowerCase()}.
           </Text>
         </div>

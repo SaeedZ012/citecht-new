@@ -1,8 +1,10 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading, Text } from "@/components/ui/Typography";
-import { Link } from "@/components/ui/Link";
+import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { Link } from "@/components/ui/Link";
 import { ROUTES } from "@/constants/routes";
 import { INDUSTRIES } from "./industriesData";
 import { IndustryCard } from "./IndustryCard";
@@ -16,13 +18,10 @@ export function Industries() {
     <Section spacing="lg" className="bg-muted/40">
       <Container size="xl">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-accent">
-            <span className="h-px w-6 bg-accent" aria-hidden="true" />
-            INDUSTRY EXPERTISE
-          </span>
+          <Eyebrow variant="dash">Industry expertise</Eyebrow>
 
           <Heading variant="h2" className="text-balance">
-            Industries We Serve
+            Industries we serve
           </Heading>
 
           <Text variant="body" className="text-muted-foreground">
@@ -44,19 +43,17 @@ export function Industries() {
             close to yours.
           </Text>
 
-          <Link
-            href={ROUTES.contact}
-            variant="unstyled"
-            className="group inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/90"
-          >
-            Discuss Your Industry
-            <Icon
-              size="sm"
-              aria-hidden
-              className="transition-transform duration-300 group-hover:translate-x-0.5"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </Icon>
+          <Link href={ROUTES.contact} variant="unstyled" className="group inline-flex">
+            <Button variant="accent" size="lg" className="gap-2">
+              Discuss your industry
+              <Icon
+                size="sm"
+                aria-hidden
+                className="transition-transform duration-300 group-hover:translate-x-0.5"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </Icon>
+            </Button>
           </Link>
         </div>
       </Container>

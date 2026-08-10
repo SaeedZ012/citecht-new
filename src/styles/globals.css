@@ -32,7 +32,8 @@
   --primary-foreground: #fafafa;
   --secondary: #f4f4f5;
   --secondary-foreground: #171717;
-  --accent: #4f46e5;
+  /* Professional tech blue — avoids the common indigo/purple AI look */
+  --accent: #2563eb;
   --accent-foreground: #ffffff;
 
   /* Status (theme-independent, AA against their foreground) */
@@ -71,7 +72,7 @@
   --primary-foreground: #171717;
   --secondary: #27272a;
   --secondary-foreground: #fafafa;
-  --accent: #6366f1;
+  --accent: #3b82f6;
   --accent-foreground: #ffffff;
 
   --overlay: rgb(0 0 0 / 0.6);
@@ -128,6 +129,17 @@ body {
  * ------------------------------------------------------------------------- */
 .marquee {
   overflow: hidden;
+}
+
+/* Soft edge fade so marquee rows feel continuous, not clipped. */
+.tech-marquee {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
 }
 
 .marquee__track {

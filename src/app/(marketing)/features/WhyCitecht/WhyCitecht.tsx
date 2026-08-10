@@ -1,82 +1,72 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading, Text } from "@/components/ui/Typography";
-import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
 import { Link } from "@/components/ui/Link";
+import { Icon } from "@/components/ui/Icon";
 import { ROUTES } from "@/constants/routes";
-import { DOMAINS, PILLARS } from "./whyCitechtData";
+import { OPERATIONAL_STATS, PILLARS } from "./whyCitechtData";
 import { PillarCard } from "./PillarCard";
-import { OutcomeBand } from "./OutcomeBand";
 
 /**
- * "Why Teams Work With CiTechT" — sits under the home services grid.
- *
- * Arrangement (deliberately distinct from a generic feature grid):
- *   1. Centered header with a domain-capability chip row underneath it.
- *   2. Three pillars mapped directly to "build, improve, automate,
- *      stabilize" from the section copy.
- *   3. An asymmetric outcome band that makes "dependable and easy to
- *      operate after launch" concrete, backed by operational stats.
+ * Why CiTechT — editorial list aligned with the home Services section.
  */
 export function WhyCitecht() {
   return (
     <Section spacing="lg">
       <Container size="xl">
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-semibold tracking-[0.15em] text-accent">
-            <span
-              className="h-1.5 w-1.5 rounded-full bg-accent"
-              aria-hidden="true"
-            />
-            WHY CITECHT
-          </span>
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="flex flex-col gap-5 lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
+            <Eyebrow>Why CiTechT</Eyebrow>
 
-          <Heading variant="h2" className="text-balance">
-            Why Teams Work With <span className="text-accent">CiTechT</span>
-          </Heading>
+            <Heading variant="h2" className="text-balance">
+              Built to run, not just to launch
+            </Heading>
 
-          <Text variant="body" className="text-muted-foreground">
-            We help teams build, improve, automate, and stabilize the
-            software, cloud, data, AI, and infrastructure systems their
-            operations depend on — with a focus on systems that are
-            dependable and easy to operate after launch.
-          </Text>
-        </div>
+            <Text variant="muted" className="max-w-sm">
+              We build, improve, and stabilize the systems operations depend on
+              — with the same care after handoff as before.
+            </Text>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
-          {DOMAINS.map((domain) => (
-            <span
-              key={domain.label}
-              className="rounded-full border border-border bg-muted px-4 py-1.5 text-sm font-medium text-foreground"
+            <Link
+              href={ROUTES.about}
+              variant="unstyled"
+              className="group mt-2 inline-flex items-center gap-2 self-start text-sm font-medium text-foreground"
             >
-              {domain.label}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {PILLARS.map((pillar) => (
-            <PillarCard key={pillar.tag} pillar={pillar} />
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <OutcomeBand />
-        </div>
-
-        <div className="mt-10 flex justify-center">
-          <Link href={ROUTES.about} variant="unstyled" className="group inline-flex">
-            <Button variant="accent" size="lg" className="gap-3">
-              Learn More About Us
+              About the team
               <Icon
                 size="sm"
                 className="transition-transform duration-300 group-hover:translate-x-0.5"
+                aria-hidden
               >
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </Icon>
-            </Button>
-          </Link>
+            </Link>
+          </div>
+
+          <div className="lg:col-span-8">
+            <div className="divide-y divide-border border-y border-border">
+              {PILLARS.map((pillar, index) => (
+                <PillarCard key={pillar.tag} pillar={pillar} index={index} />
+              ))}
+            </div>
+
+            <dl className="mt-10 grid gap-6 sm:grid-cols-3">
+              {OPERATIONAL_STATS.map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-1">
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd>
+                    <Heading variant="h3" as="span">
+                      {stat.value}
+                    </Heading>
+                    <Text variant="muted" className="mt-1">
+                      {stat.label}
+                    </Text>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </Container>
     </Section>

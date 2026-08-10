@@ -7,14 +7,8 @@ export interface WorkflowMetric {
 
 export interface WorkflowStep {
   id: string;
-  /** Zero-padded index shown on the timeline node, e.g. "01". */
   number: string;
-  /** Short label under the timeline node. */
   title: string;
-  /** One or two words under the title on the timeline. */
-  subtitle: string;
-  /** Small mono badge shown above the heading in the content panel. */
-  badge: string;
   heading: string;
   description: string;
   bullets: string[];
@@ -69,29 +63,19 @@ function RocketIconPaths() {
   );
 }
 
-/**
- * The five phases of an engagement, driving the auto-playing Workflow
- * showcase. Purely data — no hardcoded steps in the components that render
- * this array.
- */
+/** Five engagement phases for the workflow showcase. */
 export const WORKFLOW_STEPS: WorkflowStep[] = [
   {
     id: "diagnostics",
     number: "01",
     title: "Diagnostics",
-    subtitle: "Audit & discovery",
-    badge: "PHASE 01 · DISCOVERY",
-    heading: "Diagnosing the system, not just the symptoms.",
+    heading: "Find the real constraint",
     description:
-      "We trace every operational headache back to its root — architecture, data flow, and the constraints your team has been quietly working around.",
-    bullets: [
-      "Stakeholder & workflow interviews",
-      "Full technical & infrastructure audit",
-      "Risk and bottleneck mapping",
-    ],
+      "We map architecture, data flow, and workflow friction before proposing a build path.",
+    bullets: ["Technical audit", "Risk and bottleneck mapping"],
     metrics: [
-      { label: "Avg. duration", value: "1–2 wks" },
-      { label: "Deliverable", value: "Findings report" },
+      { label: "Duration", value: "1–2 wks" },
+      { label: "Deliverable", value: "Findings" },
     ],
     icon: <ScannerIconPaths />,
   },
@@ -99,19 +83,13 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
     id: "blueprint",
     number: "02",
     title: "Blueprint",
-    subtitle: "Architecture & design",
-    badge: "PHASE 02 · ARCHITECTURE",
-    heading: "Engineering the blueprint before writing a line of code.",
+    heading: "Design before code",
     description:
-      "System architecture, data models, and interface design come together into one reviewable plan — so every later decision has something solid to stand on.",
-    bullets: [
-      "System & data architecture",
-      "UI/UX design and prototyping",
-      "Tech stack & platform selection",
-    ],
+      "Architecture, data models, and interface direction land in one reviewable plan.",
+    bullets: ["System architecture", "Stack and UX direction"],
     metrics: [
-      { label: "Avg. duration", value: "1–3 wks" },
-      { label: "Deliverable", value: "Architecture doc" },
+      { label: "Duration", value: "1–3 wks" },
+      { label: "Deliverable", value: "Plan" },
     ],
     icon: <BlueprintCubeIconPaths />,
   },
@@ -119,19 +97,13 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
     id: "engineering",
     number: "03",
     title: "Engineering",
-    subtitle: "Build & integrate",
-    badge: "PHASE 03 · ENGINEERING",
-    heading: "Building in focused, continuously tested sprints.",
+    heading: "Build in short, tested cycles",
     description:
-      "Clean, modular code shipped in short cycles — every module isolated, automatically tested, and reviewed before it ever reaches production.",
-    bullets: [
-      "Agile sprints with weekly demos",
-      "Automated testing & code review",
-      "API & third-party integration",
-    ],
+      "Modular code ships in focused sprints — reviewed and tested before it reaches production.",
+    bullets: ["Weekly demos", "Tests and code review"],
     metrics: [
-      { label: "Avg. duration", value: "4–10 wks" },
-      { label: "Test coverage", value: "90%+" },
+      { label: "Duration", value: "4–10 wks" },
+      { label: "Coverage", value: "90%+" },
     ],
     icon: <TerminalIconPaths />,
   },
@@ -139,18 +111,12 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
     id: "integration",
     number: "04",
     title: "Integration",
-    subtitle: "Cloud & connectivity",
-    badge: "PHASE 04 · INTEGRATION",
-    heading: "Connecting every system into one reliable stack.",
+    heading: "Connect the stack",
     description:
-      "Cloud infrastructure, APIs, and third-party services are wired together and hardened — so data moves reliably across your entire stack.",
-    bullets: [
-      "Cloud infrastructure provisioning",
-      "Secure API & service integration",
-      "CI/CD pipeline configuration",
-    ],
+      "Cloud, APIs, and services wired together so data moves reliably across the system.",
+    bullets: ["Cloud setup", "API and CI/CD wiring"],
     metrics: [
-      { label: "Uptime target", value: "99.9%" },
+      { label: "Uptime", value: "99.9%" },
       { label: "Deploys", value: "Automated" },
     ],
     icon: <CloudIntegrationIconPaths />,
@@ -159,18 +125,12 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
     id: "optimization",
     number: "05",
     title: "Optimization",
-    subtitle: "Launch & scale",
-    badge: "PHASE 05 · OPTIMIZATION",
-    heading: "Tuning for performance, then staying on call.",
+    heading: "Launch, then stay close",
     description:
-      "We profile, optimize, and launch — then stay close with monitoring and support so the system keeps performing long after go-live.",
-    bullets: [
-      "Performance profiling & tuning",
-      "Production launch & monitoring",
-      "Ongoing support & SLAs",
-    ],
+      "We tune performance, go live, and keep monitoring so the system holds after handoff.",
+    bullets: ["Launch monitoring", "Post-launch support"],
     metrics: [
-      { label: "Post-launch support", value: "30 days" },
+      { label: "Support", value: "30 days" },
       { label: "Monitoring", value: "24/7" },
     ],
     icon: <RocketIconPaths />,

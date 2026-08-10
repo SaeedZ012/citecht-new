@@ -1,13 +1,18 @@
 import type { ReactNode } from "react";
 import { Section, type SectionSpacing } from "@/components/ui/Section";
 import { Container, type ContainerSize } from "@/components/ui/Container";
+import { Eyebrow, type EyebrowVariant } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Typography";
 import { Text } from "@/components/ui/Typography";
 import { cn } from "@/utils/cn";
 
 export interface SectionWrapperProps {
   children: ReactNode;
-  /** Optional section eyebrow/title. */
+  /** Optional small label above the title. */
+  eyebrow?: string;
+  /** Eyebrow visual treatment. */
+  eyebrowVariant?: EyebrowVariant;
+  /** Optional section title. */
   title?: string;
   /** Optional supporting description shown under the title. */
   description?: string;
@@ -25,6 +30,8 @@ export interface SectionWrapperProps {
  */
 export function SectionWrapper({
   children,
+  eyebrow,
+  eyebrowVariant = "bar",
   title,
   description,
   spacing = "md",
@@ -33,11 +40,21 @@ export function SectionWrapper({
   id,
   className,
 }: SectionWrapperProps) {
+  const hasHeader = Boolean(eyebrow || title || description);
+
   return (
     <Section spacing={spacing} id={id} className={className}>
       <Container size={containerSize}>
-        {title || description ? (
-          <div className={cn("mb-10 flex flex-col gap-3", centered && "text-center")}>
+        {hasHeader ? (
+          <div
+            className={cn(
+              "mb-10 flex flex-col gap-3",
+              centered && "items-center text-center"
+            )}
+          >
+            {eyebrow ? (
+              <Eyebrow variant={eyebrowVariant}>{eyebrow}</Eyebrow>
+            ) : null}
             {title ? <Heading variant="h2">{title}</Heading> : null}
             {description ? (
               <Text
