@@ -40,11 +40,11 @@ export function Work() {
 
         <div className="mt-12 flex justify-center">
           <Link
-            href={ROUTES.services}
+            href={ROUTES.contact}
             variant="unstyled"
             className="group inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/90"
           >
-            View All Projects
+            Start a Project
             <Icon
               size="sm"
               aria-hidden

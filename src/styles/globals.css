@@ -240,6 +240,58 @@ body {
   animation: particle-drift 6s ease-in-out infinite;
 }
 
+/* Home hero — gentle 3D float (translate + slight Y rotation). */
+@keyframes float-3d {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateY(-4deg) rotateX(2deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotateY(4deg) rotateX(-2deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float-3d 7s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+/* Soft orbit ring for the light hero stage. */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit {
+  animation: orbit-spin 48s linear infinite;
+}
+
+@keyframes orbit-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-orbit-reverse {
+  animation: orbit-spin-reverse 64s linear infinite;
+}
+
+/* Home services spotlight — subtle lift on the 3D visual well. */
+@keyframes visual-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-visual-bob {
+  animation: visual-bob 4.5s ease-in-out infinite;
+}
+
 /* .marquee__track is intentionally exempt from the reduced-motion rule
    below: it's a slow, linear-only translation (no scaling/rotation/
    flashing) — the same category of motion most browsers/OSes already
@@ -251,7 +303,11 @@ body {
   .animate-spin-slow,
   .animate-breathe,
   .animate-float,
-  .animate-particle {
+  .animate-particle,
+  .animate-float-3d,
+  .animate-orbit,
+  .animate-orbit-reverse,
+  .animate-visual-bob {
     animation: none;
   }
 }

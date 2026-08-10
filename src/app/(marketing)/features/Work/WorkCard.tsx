@@ -1,4 +1,5 @@
 import { Image } from "@/components/ui/Image";
+import { Link } from "@/components/ui/Link";
 import { Heading, Text } from "@/components/ui/Typography";
 import type { WorkItem } from "./workData";
 
@@ -8,11 +9,15 @@ export interface WorkCardProps {
 
 /**
  * Featured work card: image with a category pill overlay, title,
- * description, and a row of stack tags underneath.
+ * description, and stack tags. Whole card links to the portfolio page.
  */
 export function WorkCard({ item }: WorkCardProps) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-md border border-border bg-surface transition-shadow hover:shadow-md">
+    <Link
+      href={item.href}
+      variant="unstyled"
+      className="group flex h-full flex-col overflow-hidden rounded-md border border-border bg-surface transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    >
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
         <Image
           src={item.imageSrc}
@@ -21,7 +26,7 @@ export function WorkCard({ item }: WorkCardProps) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-3 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm backdrop-blur-sm">
+        <span className="absolute bottom-3 left-3 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
           {item.category}
         </span>
       </div>
@@ -45,6 +50,6 @@ export function WorkCard({ item }: WorkCardProps) {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

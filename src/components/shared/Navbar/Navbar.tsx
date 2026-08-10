@@ -6,7 +6,8 @@ import { Link } from "@/components/ui/Link";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/shared/Logo";
 import { MAIN_NAV } from "@/constants/navigation";
-import { ROUTES } from "@/constants/routes";
+import { ROUTES, servicePath } from "@/constants/routes";
+import { SERVICES } from "@/data/services";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { cn } from "@/utils/cn";
 
@@ -21,28 +22,16 @@ function navLinkClass(isActive: boolean, className?: string) {
   );
 }
 
-const SERVICE_MENU = [
-  {
-    label: "Web Development",
-    href: ROUTES.services,
-    description: "Fast, maintainable websites and web apps.",
-  },
-  {
-    label: "UI/UX Design",
-    href: ROUTES.services,
-    description: "Design systems and accessible interfaces.",
-  },
-  {
-    label: "Consulting",
-    href: ROUTES.services,
-    description: "Architecture, performance, and scalability.",
-  },
-  {
-    label: "Maintenance",
-    href: ROUTES.services,
-    description: "Monitoring, updates, and improvements.",
-  },
-];
+function isNavActive(pathname: string, href: string) {
+  if (href === ROUTES.home) return pathname === href;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+const SERVICE_MENU = SERVICES.map((service) => ({
+  label: service.title,
+  href: servicePath(service.slug),
+  description: service.shortDescription,
+}));
 
 function ChevronDown({ className }: { className?: string }) {
   return (
@@ -83,7 +72,7 @@ export function Navbar() {
             className="hidden items-center gap-1 lg:flex"
           >
             {MAIN_NAV.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = isNavActive(pathname, item.href);
 
               if (item.label === "Services") {
                 return (
@@ -99,23 +88,25 @@ export function Navbar() {
                       <ChevronDown className="transition-transform group-hover:rotate-180" />
                     </Link>
 
-                    <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3 opacity-0 transition group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
+                    <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-[36rem] -translate-x-1/2 pt-3 opacity-0 transition group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
                       <div className="rounded-lg border border-border bg-surface p-2 shadow-md">
-                        {SERVICE_MENU.map((sub) => (
-                          <Link
-                            key={sub.label}
-                            href={sub.href}
-                            variant="unstyled"
-                            className="flex flex-col gap-0.5 rounded-md px-3 py-2 transition-colors hover:bg-muted"
-                          >
-                            <span className="text-sm font-medium text-foreground">
-                              {sub.label}
-                            </span>
-                            <span className="text-xs text-muted-foreground">
-                              {sub.description}
-                            </span>
-                          </Link>
-                        ))}
+                        <div className="grid grid-cols-2 gap-1">
+                          {SERVICE_MENU.map((sub) => (
+                            <Link
+                              key={sub.label}
+                              href={sub.href}
+                              variant="unstyled"
+                              className="flex flex-col gap-0.5 rounded-md px-3 py-2.5 transition-colors hover:bg-muted"
+                            >
+                              <span className="text-sm font-medium text-foreground">
+                                {sub.label}
+                              </span>
+                              <span className="text-xs leading-snug text-muted-foreground">
+                                {sub.description}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -156,7 +147,7 @@ export function Navbar() {
             className="flex flex-col gap-1 border-t border-border py-3 lg:hidden"
           >
             {MAIN_NAV.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = isNavActive(pathname, item.href);
 
               return (
               <Link

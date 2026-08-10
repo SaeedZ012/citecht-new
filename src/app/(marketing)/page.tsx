@@ -1,4 +1,4 @@
-import { Hero, Services, WhyCitecht, Work, CaseStudies } from "./features";
+import { Hero, Services, Industries, WhyCitecht, Work, CaseStudies } from "./features";
 import { CTA } from "@/components/shared/CTA";
 
 /**
@@ -9,6 +9,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Services />
+      <Industries />
       <WhyCitecht />
       <Work />
       <CaseStudies />

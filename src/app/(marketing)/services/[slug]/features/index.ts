@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { Overview } from "./Overview";
+export { Capabilities } from "./Capabilities";
+export { Process } from "./Process";
+export { Technologies } from "./Technologies";
+export { Benefits } from "./Benefits";
+export { UseCases } from "./UseCases";
+export { FAQ } from "./FAQ";
+export { RelatedServices } from "./RelatedServices";
