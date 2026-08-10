@@ -5,8 +5,8 @@ import { ROUTES } from "@/constants/routes";
 /** Primary header navigation. */
 export const MAIN_NAV: NavItem[] = [
   { label: "Home", href: ROUTES.home },
-  { label: "About", href: ROUTES.about },
   { label: "Services", href: ROUTES.services },
+  { label: "About", href: ROUTES.about },
   { label: "Insights", href: ROUTES.insights },
   { label: "Contact", href: ROUTES.contact },
 ];
@@ -16,8 +16,8 @@ export const FOOTER_NAV: { title: string; items: NavItem[] }[] = [
   {
     title: "Company",
     items: [
-      { label: "About", href: ROUTES.about },
       { label: "Services", href: ROUTES.services },
+      { label: "About", href: ROUTES.about },
       { label: "Insights", href: ROUTES.insights },
     ],
   },
