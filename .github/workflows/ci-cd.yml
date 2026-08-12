@@ -48,3 +48,47 @@ jobs:
           include-hidden-files: true
           retention-days: 7
           if-no-files-found: error
+
+  # ---------------------------------------------------------------------------
+  # CD (Continuous Deployment)
+  #
+  # Disabled for now: no deployment target is available yet. When you're ready
+  # to deploy, uncomment this job and fill in ONE of the deploy steps below.
+  # It reuses the exact build produced by the `build` job (via `needs` +
+  # download-artifact), so you ship the artifact you already verified.
+  #
+  # Remember to add the required secrets under:
+  #   GitHub repo -> Settings -> Secrets and variables -> Actions
+  # ---------------------------------------------------------------------------
+  # deploy:
+  #   name: Deploy
+  #   needs: build                 # only runs if CI + build succeed
+  #   runs-on: ubuntu-latest
+  #   # environment: production    # optional: enables manual approval + scoped secrets
+  #   steps:
+  #     - name: Download build artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: next-build
+  #         path: .next
+  #
+  #     # --- Option A: Vercel (most natural for Next.js) ---
+  #     - uses: actions/checkout@v5
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version: 22
+  #         cache: npm
+  #     - name: Deploy to Vercel
+  #       run: |
+  #         npm i -g vercel
+  #         vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+  #
+  #     # --- Option B: Your own server (SSH) ---
+  #     # - name: Deploy over SSH
+  #     #   uses: appleboy/ssh-action@v1
+  #     #   with:
+  #     #     host: ${{ secrets.SERVER_HOST }}
+  #     #     username: ${{ secrets.SERVER_USER }}
+  #     #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #     #     script: |
+  #     #       cd /var/www/citecht && npm ci --omit=dev && pm2 restart citecht
