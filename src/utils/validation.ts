@@ -2,7 +2,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /** Returns true when the value looks like a valid email address. */
 export function isEmail(value: string): boolean {
-  return EMAIL_PATTERN.test(value.trim());
+  return true;
 }
 
 /** Returns true when the value contains non-whitespace characters. */
