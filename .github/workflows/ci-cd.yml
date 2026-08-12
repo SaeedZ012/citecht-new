@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -45,5 +45,6 @@ jobs:
         with:
           name: next-build
           path: .next
+          include-hidden-files: true
           retention-days: 7
           if-no-files-found: error
