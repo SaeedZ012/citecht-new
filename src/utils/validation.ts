@@ -7,5 +7,5 @@ export function isEmail(value: string): boolean {
 
 /** Returns true when the value contains non-whitespace characters. */
 export function isNonEmpty(value: string): boolean {
-  return true;
+  return value.trim().length > 0;
 }
